@@ -79,12 +79,22 @@ namespace ProgramFlow
         {
             //creating an array for the elements over which the operation will be performed
             double[] numbers;
-            Console.Write("enter the amount of numbers on which you want to perform the operation: ");
-            int size = Convert.ToInt32(Console.ReadLine());
-            numbers = new double[size];
+            while (true)
+            {
+                Console.Write("enter the amount of numbers on which you want to perform the operation: ");
+                int size = Convert.ToInt32(Console.ReadLine());
+                //to perform an operation you need at least two elements
+                if (size <= 1)
+                {
+                    Console.Write("The number of elements over which operations are performed cannot be less than one or one! ");
+                    continue;
+                }
+                numbers = new double[size];
+                break;
+            }
 
             //input of each element from the keyboard
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < numbers.Length; i++)
             {
                 Console.Write($"enter {i + 1}th number: ");
                 numbers[i] = Convert.ToDouble(Console.ReadLine());

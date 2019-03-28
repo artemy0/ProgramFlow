@@ -5,3 +5,10 @@ C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\Program
 C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\ProgramFlow\obj\Debug\ProgramFlow.csproj.CoreCompileInputs.cache
 C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\ProgramFlow\obj\Debug\ProgramFlow.exe
 C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\ProgramFlow\obj\Debug\ProgramFlow.pdb
+C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\bin\Debug\ProgramFlow.exe.config
+C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\bin\Debug\ProgramFlow.exe
+C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\bin\Debug\ProgramFlow.pdb
+C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\obj\Debug\ProgramFlow.csprojAssemblyReference.cache
+C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\obj\Debug\ProgramFlow.csproj.CoreCompileInputs.cache
+C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\obj\Debug\ProgramFlow.exe
+C:\Users\Artsem\OneDrive\Рабочий стол\ProgramFlow\ProgramFlow\obj\Debug\ProgramFlow.pdb
