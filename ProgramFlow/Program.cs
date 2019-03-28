@@ -6,92 +6,29 @@ namespace ProgramFlow
     {
         static void Main(string[] args)
         {
-            while (true)
-            {
-                //menu
-                Console.WriteLine("1. + operation");
-                Console.WriteLine("2. - operation");
-                Console.WriteLine("3. * operation");
-                Console.WriteLine("4. / operation");
-                Console.WriteLine("5. ! operation");
-                Console.WriteLine("esc. to exit");
+            Console.WriteLine("Welcome to the math statistics program.");
 
-                //select a menu item
-                Console.Write("select: ");
-                ConsoleKeyInfo select = Console.ReadKey(false);
-                Console.WriteLine();
 
-                //exit?
-                if (select.Key == ConsoleKey.Escape)
-                    return;
-
-                //array for the data in which the results will be stored
-                double[] numbers;
-                //calculation of results in accordance with the selected operation
-                double result;
-                switch (select.KeyChar)
-                {
-                    case '1':
-                    case '+':
-                        numbers = ManuallyFillDataArray();
-                        result = MathOperations.Addition(numbers);
-                        PrintOperation(numbers, '+', result);
-                        break;
-                    case '2':
-                    case '-':
-                        numbers = ManuallyFillDataArray();
-                        result = MathOperations.Subtraction(numbers);
-                        PrintOperation(numbers, '-', result);
-                        break;
-                    case '3':
-                    case '*':
-                        numbers = ManuallyFillDataArray();
-                        result = MathOperations.Multiplection(numbers);
-                        PrintOperation(numbers, '*', result);
-                        break;
-                    case '4':
-                    case '/':
-                        numbers = ManuallyFillDataArray();
-                        result = MathOperations.Division(numbers);
-                        PrintOperation(numbers, '/', result);
-                        break;
-                    case '5':
-                    case '!':
-                        Console.Write("enter the number: ");
-                        ulong number = Convert.ToUInt64(Console.ReadLine());
-                        result = MathOperations.Factorial(number);
-                        Console.WriteLine($"Result: {number}! = {result}");
-                        break;
-                    default:
-                        Console.WriteLine("this key doesn't exist.");
-                        break;
-                }
-
-                //Waiting for any key to repeat all actions.
-                Console.WriteLine("Press any key to continue.");
-                Console.ReadKey();
-                Console.Clear();
-            }
-        }
-
-        //Что делать с данным методом? Лучше ли вывести данные в Main(). Как это сделать?
-        public static double[] ManuallyFillDataArray()
-        {
-            //creating an array for the elements over which the operation will be performed
+            //collection of items
             double[] numbers;
-            while (true)
+            do
             {
-                Console.Write("enter the amount of numbers on which you want to perform the operation: ");
+                //enter the number of items
+                Console.Write("enter the amount of numbers to which the statistics will be applied: ");
                 int size = Convert.ToInt32(Console.ReadLine());
-                //to perform an operation you need at least two elements
-                if (size <= 1)
+                //creating an array with more than zero elements
+                if (0 < size)
                 {
-                    Console.Write("The number of elements over which operations are performed cannot be less than one or one! ");
+                    numbers = new double[size];
+                    break;
+                }
+                else
+                {
+                    //error
+                    Console.Write("the number of elements must be greater than zero. ");
                     continue;
                 }
-                numbers = new double[size];
-                break;
-            }
+            } while (true);
 
             //input of each element from the keyboard
             for (int i = 0; i < numbers.Length; i++)
@@ -100,20 +37,113 @@ namespace ProgramFlow
                 numbers[i] = Convert.ToDouble(Console.ReadLine());
             }
 
-            return numbers;
+
+            Console.WriteLine("press any key to continue");
+            Console.ReadKey();
+            Console.Clear();
+
+
+            //the cycle that will constantly offer you to perform any action
+            while (true)
+            {
+                //array
+                DisplayArray(numbers);
+                //menu
+                DisplayMenu();
+
+                //select a menu item
+                Console.Write("select: ");
+                ConsoleKeyInfo select = Console.ReadKey(false);
+                Console.WriteLine();
+
+                //perform any statistical operation.
+                double result; //to store the result of any statistical operation
+                switch (select.Key)
+                {
+                    case ConsoleKey.Escape:
+                        return;
+
+                    case ConsoleKey.D1:
+                        result = MathStatisticsOperations.GetAverage(numbers);
+                        Console.WriteLine($"Average value = {result}");
+                        break;
+
+                    case ConsoleKey.D2:
+                        result = MathStatisticsOperations.GetMin(numbers);
+                        Console.WriteLine($"Min value = {result}");
+                        break;
+
+                    case ConsoleKey.D3:
+                        result = MathStatisticsOperations.GetMax(numbers);
+                        Console.WriteLine($"Max value = {result}");
+                        break;
+
+                    //the determination of which part of a certain range is contained in the original data set
+                    case ConsoleKey.D4:
+                        Console.Write("initial value: ");
+                        double initialValue = Convert.ToDouble(Console.ReadLine());
+                        Console.Write("final value: ");
+                        double finalValue = Convert.ToDouble(Console.ReadLine());
+                        //in simple words, the belonging of some interval to another one
+                        result = MathStatisticsOperations.GetPercentageOfItemsInInterval(numbers, initialValue, finalValue);
+                        Console.WriteLine($"the percent of elements included in the interval [{initialValue}, {finalValue}] = {result:p}");
+                        break;
+
+                    default:
+                        Console.WriteLine("this key doesn't exist.");
+                        break;
+                }
+
+
+                //waiting for any key to repeat all actions
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadKey();
+                Console.Clear();
+            }
         }
 
-        //Что делать с данным методом? Лучше ли вывести данные в Main(). Как это сделать?
-        public static void PrintOperation(double[] numbers, char operationSymbol, double result)
+        public static void DisplayMenu()
         {
-            //sample output: Result: 54 + 34 + 8 = 96
-            Console.Write("Result: ");
-            int i;
-            for (i = 0; i < numbers.Length - 1; i++)
-            {
-                Console.Write($"{numbers[i]} {operationSymbol} ");
-            }
-            Console.WriteLine($"{numbers[i]} = {result}");
+            Console.WriteLine("1. find average value");
+            Console.WriteLine("2. find the minimum value");
+            Console.WriteLine("3. find the maximum value");
+            Console.WriteLine("4. find the percentage of the elements of a certain interval");
+            Console.WriteLine("esc. to exit");
         }
+
+        public static void DisplayArray(double[] numbers)
+        {
+            Console.Write("Array: ");
+            foreach (double item in numbers)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+            //it will look like: Array: 34 18 98\n
+        }
+
+
+        //public static double[] CreateArray(int size)
+        //{
+        //    //determining whether the transferred size value is greater than 0
+        //    if (size <= 0)
+        //        throw new Exception("the number of elements must be greater than zero. ");
+
+        //    double[] numbers = new double[size];
+
+        //    //input of each element from the keyboard
+        //    FillArrayManually(numbers);
+
+        //    return numbers;
+        //}
+
+        //public static void FillArrayManually(double[] numbers)
+        //{
+        //    for (int i = 0; i < numbers.Length; i++)
+        //    {
+        //        Console.Write($"enter {i + 1}th number: ");
+        //        numbers[i] = Convert.ToDouble(Console.ReadLine());
+        //    }
+        //}
     }
 }
